@@ -1,0 +1,19 @@
+Looking around on the domain controller I tried multiple things such as updating, attempting to fix something with the manageability of the server. After a while of looking around and researching I couldn't find anything that would help. 
+I then tried logging on to the workstation and got an error message. To make sure that this was the problem I looked at one of the users in the meeting notes that were having trouble and changed their password to see if I could logon using their account or to see if that same message would show. 
+
+To change the account password was done by going to "Active Directory Users and Computers"  right click on the user and select reset password. The user I used was Brimlock Stones and I changed has password to password123. 
+I then went to the workstation and tried to login as Stones, I was unable to and received the message "The Security Database on the Server does not have a Computer Account for this Workstation Trust Relationship". This was the same message that I got when trying to login as playerone.
+
+I then looked up how to fix this problem and found that having the workstation leave and rejoin the domain could fix the problem. 
+
+To get into the workstation I logged in with the workstation domain by using WORKSTATION\playerone and the password of password123.
+
+Leaving the domain: 
+I first opened "Run" and typed sysdm.cpl to open "System Properties". Next under Computer Name tab I click Change, I then clicked Workgroup in "Member of" and entered a workgroup to apart of I used WORKG. Lastly I clicked ok and entered playerone credentials and restarted the workstation. 
+
+After the workstation restarts I logged in as the playerone.
+
+Rejoining domain: 
+I opened "Run" and typed sysdm.cpl again. I then followed the same steps but changed the "Member of" from Workgroup back to Domain and typed in daswebs.com then clicked ok and entered playerone credentials. The workmachine should restart again. 
+
+I can now login as playerone next try and login as Stones (it should work). If you want to try another account the other user having problems was Sergio Chanel reset his password and try to login to the workmachine.
