@@ -1,7 +1,8 @@
 
 Checking and Cleaning Boot Partition 
 There are many ways to check a partitions the main way is within the BIOS. For Windows you can use System Configuration tool and Disk Manager to remove any unneeded partitions on the disk. For Linux you are able to see these within the /boot directory. 
-To clean these partitions manually, for Windows you can use the tool Disk Management to look and remove any unneeded partitions. Using System Configurations you can check to hide all Microsoft services and then disable all other services. For Linux you can go into the /boot directory and use a couple commands to remove any unneeded kernel versions: 
+To clean these partitions manually, for Windows you can use the tool Disk Management to look and remove any unneeded partitions. 
+Using System Configurations you can check to hide all Microsoft services and then disable all other services. For Linux you can go into the /boot directory and use a couple commands to remove any unneeded kernel versions: 
 Uname –r: to check the current kernel 
 Rpm –qa | grep kernal: this will check for any other kernel versions installed 
 Rpm –e [kernel version]: Replacing the "kernel version" will remove that version for the boot drive
