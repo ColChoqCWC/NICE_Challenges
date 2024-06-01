@@ -1,9 +1,6 @@
-
-
 First I performed a nmap scan on the Ip 172.16.30.55. I found the ports 22, 53, 88, 135, 139, 389, 445, 464, 593, 636, 3268, 3269, 49154, 49155, 49157, 49158, 49159. But this most important ports would be port 22 and 445.
 
 Command:  
-
 nmap –A –Pn <IP>
 
 Next I made a username list with the following names 
