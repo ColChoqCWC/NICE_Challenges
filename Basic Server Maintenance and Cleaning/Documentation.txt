@@ -1,0 +1,22 @@
+
+Checking and Cleaning Boot Partition 
+There are many ways to check a partitions the main way is within the BIOS. For Windows you can use System Configuration tool and Disk Manager to remove any unneeded partitions on the disk. For Linux you are able to see these within the /boot directory. 
+To clean these partitions manually, for Windows you can use the tool Disk Management to look and remove any unneeded partitions. Using System Configurations you can check to hide all Microsoft services and then disable all other services. For Linux you can go into the /boot directory and use a couple commands to remove any unneeded kernel versions: 
+Uname –r: to check the current kernel 
+Rpm –qa | grep kernal: this will check for any other kernel versions installed 
+Rpm –e [kernel version]: Replacing the "kernel version" will remove that version for the boot drive
+
+Performing Disk Checks 
+To perform a disk check for windows you can use the tool Disk Management to look at all disk partitions on the system. For Linux you can use the command df –h: this shows the disk usage in MB and GB. 
+
+Scheduled Datadump 
+For a PFsense firewall to manually perform a data dumb would be to copy the contents of the config.xml to the backup server. A command that I found could be something like this:
+#/bin/cp /cf/conf/config.xml /mnt/backup/pfconfig/config-`hostname`-$myDate.xml (you would then have to change the location)
+This can be automated by using cron jobs within the shell
+
+Scheduling Reboots 
+To determine if a machine using windows needs a reboot you could look in the registry and see if a reboot is required. Another reason would to check if a update has occurred. To automated this you would use a PowerShell script to check the registry and if the system has been updated. For Linux you can check for /var/run/reboot-required file on Debian OS or run the command  
+needs-restarting –r (if returns 0 no reboot if 1 the reboot) on RedHat OS. You can automate these tasks by also using scripts and cron jobs. 
+
+Physical Maintenace 
+For physical maintenance it is important that servers are dusted off so that dust does not accumulate and cause cooling issues. You will also need to make sure that the server room has proper ventilation as to make sure the server is able to cool correctly.
