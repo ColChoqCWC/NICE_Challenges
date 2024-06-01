@@ -15,7 +15,8 @@ For a PFsense firewall to manually perform a data dumb would be to copy the cont
 This can be automated by using cron jobs within the shell
 
 Scheduling Reboots 
-To determine if a machine using windows needs a reboot you could look in the registry and see if a reboot is required. Another reason would to check if a update has occurred. To automated this you would use a PowerShell script to check the registry and if the system has been updated. For Linux you can check for /var/run/reboot-required file on Debian OS or run the command  
+To determine if a machine using windows needs a reboot you could look in the registry and see if a reboot is required. Another reason would to check if a update has occurred. 
+To automated this you would use a PowerShell script to check the registry and if the system has been updated. For Linux you can check for /var/run/reboot-required file on Debian OS or run the command  
 needs-restarting –r (if returns 0 no reboot if 1 the reboot) on RedHat OS. You can automate these tasks by also using scripts and cron jobs. 
 
 Physical Maintenace 
