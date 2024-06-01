@@ -1,0 +1,18 @@
+First I went to the security desktop and located the pcap files on the desktop. I then went to the file share server logged in and pulled up the ip using the ifconfig command. I then entered the servers ip in the web browser on the security desktop machine. Tools used where Wireshark and VirusTotal.
+Using Wireshark I opened the pcap files starting with workstation.pcap. 
+
+Findings:
+Starting at packet 9142 to packet 12779 there was TCP port refusals on Kerberos port 88 to A bunch of different ports. Looking at the traffic there were lots of TCP port number refusals from the Ip 172.31.2.225 on port 88 (Kerberos) to a random port number. 
+What I observed was possible TCP port scanning from using the Kerberos port. This could also be some sort of Kerberos attack. I also saw something from a believe a 40. IP address that I put into VirusTotal and was marked a malicious but not by vendors but by the community so I was hesitant to look further.
+
+Now looking at the pcap file fileshare.pcap.
+
+Findings:
+Starting on packet 141 and ending on packet 2488. There is communication between the Ip 172.31.2.225 and 172.16.30.100. There is intially ICMP ping traffic then there is a flood of SYN packets fomr the Ip 172.31.2.225 with RST, ACK packets from 172.16.30.100 (fileshare server). 
+After that there was then SMB traffic between the two Ips. From What I observed was a SYN packet flood DoS attack to the File Share server. With also possible port scanning for SMB.
+
+Now looking at the pcap file prodjoomla.pcap.
+
+Findings:
+Starting from the packet 8527 to packet 8703 there is TCP SYN packets from the Ip 172.31.2.225 to the Ip 172.16.10.100 (Prod-Joomla). There is also TCP RST,ACK packets from the Ip 172.16.10.100 to the .225 Ip. 
+From my observation this seems to be a sort of TCP port scanning as looking through the pcap there is SYN requests to multiple different port numbers. With that there is and SYN,ACK from port 80 signifying that port 80 is open
