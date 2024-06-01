@@ -1,0 +1,39 @@
+
+
+First I performed a nmap scan on the Ip 172.16.30.55. I found the ports 22, 53, 88, 135, 139, 389, 445, 464, 593, 636, 3268, 3269, 49154, 49155, 49157, 49158, 49159. But this most important ports would be port 22 and 445.
+
+Command:  
+
+nmap –A –Pn <IP>
+
+Next I made a username list with the following names 
+asteele 
+jsmith 
+Jraffin 
+Jcortes 
+Krbtgt 
+Manderson 
+Nkeefe 
+Rcortes 
+Skeefe 
+tclark 
+
+Looking back at the meeting notes the users Ashley Steele and Shwan O'Keefe say they have strong passwords so we can assume they don’t need to be tested but we can do them separately later. 
+I also didn’t include the service account as they are not user accounts and can be assumed secure in this environment, but you could add them or check them separately later.
+Next I used hydra to perform a dictionary attack with the list of user names and the rockyou.txt password list
+
+Commands:  
+hydra –L <username list> -P <password list> <IP> <service> 
+hydra –l <username> -P <password list> <IP> <service> 
+
+I first tried to attack ssh but I was unable to get anything. I then got some help and noticed that I should be going after SMB. Once the attack finishes we see that the users jcortes and nkeefe have weak passwords
+
+The output was: 
+[445][smb] host: 172.16.30.55 login: jcortes password: iloveme 
+[445][smb] host: 172.16.30.55 login: nkeefe password: 987654321 
+
+To make these users change their password when they login first you access the domain controller. You then open "Active Directory Users and Computers" -> prettysafeelectronics.io -> Users. Open the Domain Users group and click on the Members tab to get a list of the group member. 
+Lastly you double click on the users that need the password change, click the Account tab and check the "User must change password at next logon" box and uncheck the "Password never expires" box. 
+
+
+
