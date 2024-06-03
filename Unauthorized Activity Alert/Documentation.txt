@@ -1,0 +1,63 @@
+Turning on Firewall for Windows Workstation: 
+
+Search firewall in windows search and click "Windows Defender Firewall" after that click "Turn Windows Defender on or off" on the side. Next click "Turn on Windows Defender Firewall" on every option. 
+
+Disabling Remote Desktop on Windows Workstation: 
+
+Open settings and click system. Then click "Remote Desktop" on the side and then turn it off. 
+
+Turning on Firewall for Windows Database and Domain Controller: 
+
+Search for "Windows Firewall with Advance Security". Next click on "Windows Firewall Properties" and select on in the drop down on "Firewall State" for the Domain, Private, and Public profiles. 
+
+Next go to "Server Manager" and under Local Server click "Windows Firewall" and then click "Turn Windows Defender on or off" on the side. Next click "Turn on Windows Defender Firewall" on every option. 
+
+Disabling Romte Desktop on Windows Database and Domain Controller: 
+
+Go to "Server Manager" under "Local Server" click "Remote Desktop" then select "Don't allow remote connections to the computer" in the "Remote Desktop" section. 
+
+Removing Unauthorized users on Prod-Joomla Server: 
+
+Enter the command cd .. and the enter ls to see all users on the system. Once you see the users go to the security desktop and open the list of authorized users. you will notice that the only user on the Prod-joomla server that is allowed is playerone so you will need to remove all the other ones. 
+
+to remove a user these is the command for a Debian machine: 
+
+sudo deluser --remove-home  --remove-all-files <username> 
+
+after removing the users a believed to be the unauthorized user It would not work and I look with in the /etc/passwd file and found no other users that looked weird. I then went to every other linux machine and repeated the same thing. 
+
+I then when to the domain controller and found a unauthorized user and removed her. After all that there was still no progress. 
+
+Linux Firewalls Up: 
+
+I know that the firewalls system being used on the linux machines is iptables I tried configuring those and on the pro-joomla server it stopped working. 
+
+I then tried to access the firewall machine but it was down with the error of "-sh: /etc/rc.initial: not found" looked up what that was and it has something to do with the mounting. 
+
+some of the command that I used to configure the iptables was: 
+
+sudo iptables -A <the chain> -s <ip source> -j <drop or accept> 
+
+sudo iptables -A <the chain> -dport <dest port> -j <drop or accept> 
+
+sudo iptables -L 
+
+sudo iptables -A INPUT -p icmp --icmp-type echo-request -j DROP 
+
+look at proccess: 
+
+lsof -i -P -n | grep LISTEN 
+
+netstat -a -n | grep LISTEN 
+
+kill/stop process: 
+
+ps -aux | grep <service name> 
+
+kill <process id> 
+
+systemctl stop <service name> 
+
+Start Process: 
+
+systemctl start <service name> 
